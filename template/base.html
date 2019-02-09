@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+    
     <div class='nav-bar'>
-        <a href="">Home</a>
-
-
+        <a href="{% url 'blog:home' %}">Home</a>
     </div>
+    
     {% block content %}
 
     {% endblock %}

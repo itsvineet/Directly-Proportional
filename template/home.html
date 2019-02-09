@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<ul>
+    <li><a href="{% url 'blog:post_list' %}">Posts</a></li>  
+    <li><a href="{% url 'blog:create_post'%}">Create Post</a>  </li>       
+</ul>
+
+{% endblock %}
