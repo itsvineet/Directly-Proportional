@@ -9,5 +9,9 @@
 <p>
         {{object.content }}
 </p>
+<p>
+        <a href="{% url 'blog:delete_post' pk=object.pk %}">Delete</a>
+        <a href="{% url 'blog:update_post' pk=object.pk %}">Update</a>
+</p>
 
 {% endblock %}
