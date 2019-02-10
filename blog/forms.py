@@ -3,7 +3,7 @@
 
 # class CommentForm(ModelForm):
     
-#     class Meta:
+#     class Meta():
     
 #         model = CommentForm
-#         fields = "__all__"
+#         fields = "__all__"+ v

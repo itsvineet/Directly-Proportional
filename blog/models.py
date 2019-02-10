@@ -10,7 +10,16 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'pk': self.pk})
 
-# class Comment(models.Model):
-#     author = models.CharField(max_length=256, default="Anonymus")
-#     content = models.TextField()
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    post_name = models.ForeignKey(Post, on_delete=None)
+    author = models.CharField(max_length=256, default="NO NAME")
+    comment_text = models.TextField()
      
+
+    
+
+
+

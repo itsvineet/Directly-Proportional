@@ -6,12 +6,20 @@
 
     {% for post in post_list %}
         <p>
-                <div>
+                <div class="Post">
                        <a href="{% url 'blog:post_detail' pk=post.pk %}"> {{post.title}} </a> 
                 </div>
+                <div class="comment">
+                        <a href="{% url 'blog:post_detail' pk=post.pk %}">Comments: </a>
+                </div>
+            
         </p>
     {% endfor %}
 
+{% else %}
+<p>No Posts</p>
+
+    
 {% endif %}
 
 
