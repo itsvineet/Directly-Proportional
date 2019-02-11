@@ -1,0 +1,13 @@
+{% block content %}
+
+<h2>Login Here:</h2>
+
+<form method="POST">{%csrf_token%}
+    {{form.as_p}}
+    <button type="submit">Login</button>
+    <a href="{% url 'password_reset' %}">Forgot Your Password</a>
+
+</form>
+
+{% endblock %}
+    

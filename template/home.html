@@ -3,7 +3,16 @@
 {% block content %}
 <ul>
     <li><a href="{% url 'blog:post_list' %}">Posts</a></li>  
-    <li><a href="{% url 'blog:create_post'%}">Create Post</a>  </li>       
+    
+    
+    {% if user.is_authenticated %}
+         <li>Hi, {{user.username}}</li>
+         <li><a href="{% url 'blog:create_post'%}">Create Post</a></li>
+         <a href="{% url 'logout' %}">logout</a>
+    {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li> 
+        <h4>Don't have Account <a href="{% url 'blog:signup' %}">Sign Up</a></h4>      
+    {% endif %}
 </ul>
 
 {% endblock %}

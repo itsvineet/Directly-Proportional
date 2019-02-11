@@ -4,17 +4,26 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 from .models import Post, Comment
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
+######### SIGNUP ##########
+
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
+
+
+
+#########  POST ###########
 def home(request):
     return render(request, 'home.html')
 
 
 class PostListView(ListView):
     model = Post
-
 
 class PostDetailView(DetailView):
     model = Post
@@ -25,8 +34,7 @@ class PostDetailView(DetailView):
         context['all_comments'] = all_comments
         return context
 
-
-class CreatePostView(CreateView):
+class CreatePostView(LoginRequiredMixin, CreateView):
     model = Post
     fields = '__all__'
 
@@ -71,7 +79,7 @@ def delete_comment(request, pk):
     comment.delete()
     return redirect('blog:post_detail', pk=comment.post_name.pk)
 
-    
+
 
 
 

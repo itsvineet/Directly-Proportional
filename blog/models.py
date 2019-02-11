@@ -1,7 +1,14 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+
+# class User(AbstractUser):
+#     bio = models.TextField(max_length=500, blank=True)
+#     location = models.CharField(max_length=30, blank=True)
+
+########################
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -17,6 +24,9 @@ class Comment(models.Model):
     post_name = models.ForeignKey(Post, on_delete=None)
     author = models.CharField(max_length=256, default="NO NAME")
     comment_text = models.TextField()
+
+
+
      
 
     
