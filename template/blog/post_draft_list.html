@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+
+{% if draft_list %}
+
+    {% for draft in draft_list %}
+        <p>
+                <div class="Post">
+                      <h1><a href="{% url 'blog:post_detail' pk=draft.pk %}"> {{draft.title}} </a></h1>
+                       <a href="{% url 'blog:publish' pk=draft.pk %}">Publish</a>
+                       <a href="{% url 'blog:delete_post' pk=draft.pk %}">Delete</a>
+                       <a href="{% url 'blog:update_post' pk=draft.pk %}">Update</a>
+                       
+                </div>
+            
+            
+        </p>
+    {% endfor %}
+
+{% else %}
+<p>No Posts</p>
+
+    
+{% endif %}
+<h1> You are in post_draft_list.html</h1>
+
+
+{% endblock %}

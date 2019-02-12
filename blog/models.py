@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
+import datetime
 
 # Create your models here.
 
@@ -13,15 +14,21 @@ from django.contrib.auth.models import AbstractUser
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
+    created_date = models.DateTimeField(default=datetime.datetime.now())
+    published_date = models.DateTimeField(blank=True, null=True)
+
+    def publish(self):
+        self.published_date = datetime.datetime.now()
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail', kwargs={'pk': self.pk})
+        return reverse('blog:draft')
+        # return reverse('blog:post_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.title
 
 class Comment(models.Model):
-    post_name = models.ForeignKey(Post, on_delete=None)
+    post_name = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.CharField(max_length=256, default="NO NAME")
     comment_text = models.TextField()
 

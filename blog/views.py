@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 ######### SIGNUP ##########
@@ -16,8 +18,8 @@ class SignUpView(CreateView):
     template_name = 'signup.html'
 
 
-
 #########  POST ###########
+
 def home(request):
     return render(request, 'home.html')
 
@@ -36,7 +38,7 @@ class PostDetailView(DetailView):
 
 class CreatePostView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = '__all__'
+    fields = ('title', 'content',)
 
 class PostDeleteView(DeleteView):
     model = Post
@@ -44,8 +46,18 @@ class PostDeleteView(DeleteView):
 
 class PostUpdateView(UpdateView):
     model = Post
-    fields = '__all__'
+    fields = ('title', 'content',)
 
+class DraftListView(LoginRequiredMixin, ListView):
+    model = Post
+    login_url = '/blog/login'
+    template_name = 'blog/post_draft_list.html'
+    context_object_name = 'draft_list'
+    redirect_field_name = login_url              # Used in LoginMixin so what where should it take user if not login 
+    
+    def get_queryset(self):
+        return Post.objects.filter(published_date__isnull=True).order_by('-created_date')
+        
 
 ######## COMMENT ########
 
@@ -72,6 +84,7 @@ def create_comment(request, pk):
     return redirect('blog:post_detail', pk=pk) # Calling the Post_Detail View by Passing pk value
     #return HttpResponseRedirect('/blog')
 
+@login_required
 def delete_comment(request, pk):
     #comment = get_object_or_404(Comment, pk=pk)
     comment = Comment.objects.get(pk=pk)
@@ -79,8 +92,14 @@ def delete_comment(request, pk):
     comment.delete()
     return redirect('blog:post_detail', pk=comment.post_name.pk)
 
+########### Post Publish (Publish the post by providing the publication date) ########
 
-
+@login_required
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    post.save()
+    return redirect('blog:draft')
 
 
 
