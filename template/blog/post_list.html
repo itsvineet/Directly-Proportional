@@ -9,10 +9,10 @@
             <p>
                     <div class="Post">
                         <h2><a href="{% url 'blog:post_detail' pk=post.pk %}"> {{post.title}} </a> </h2>
+                        
+                        <h4>{{post.published_date|date:"d M,Y"}}</h4>
                     </div>
-                    <div class="comment">
-                            <a href="{% url 'blog:post_detail' pk=post.pk %}">Comments: </a>
-                    </div>
+                    
 
             </p>
         {% endif %}

@@ -16,7 +16,8 @@ class Post(models.Model):
     content = models.TextField()
     created_date = models.DateTimeField(default=datetime.datetime.now())
     published_date = models.DateTimeField(blank=True, null=True)
-   
+    contribute = models.CharField(max_length=50, null=True)
+
     def publish(self):
         self.published_date = datetime.datetime.now()
         self.save()

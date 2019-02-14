@@ -4,20 +4,18 @@
 
 
 {% if draft_list %}
-<h1>jhsdvkusdv</h1>
-<a href="{% url 'blog:contribute_list' %}">Contributions</a>
+
     {% for draft in draft_list %}
-        
-            
-    `       <p>
+        <p>
                 <div class="Post">
-                      <h1><a href="{% url 'blog:post_detail' pk=draft.pk %}"> {{draft.title}} </a></h1>
+                    <h2>Contributor name: {{draft.contribute}}</h2>
+                    <h3><a href="{% url 'blog:post_detail' pk=draft.pk %}"> {{draft.title}} </a></h3>
                        <a href="{% url 'blog:publish' pk=draft.pk %}">Publish</a>
                        <a href="{% url 'blog:delete_post' pk=draft.pk %}">Delete</a>
                        <a href="{% url 'blog:update_post' pk=draft.pk %}">Update</a>
                        
                 </div>
-            </p>
+        </p>
        
     {% endfor %}
 
@@ -26,7 +24,7 @@
 
     
 {% endif %}
-<h1> You are in post_draft_list.html</h1>
+<h1> You are in Contribute Manager</h1>
 
 
 {% endblock %}

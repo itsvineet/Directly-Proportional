@@ -56,12 +56,36 @@ class DraftListView(LoginRequiredMixin, ListView):
     redirect_field_name = login_url              # Used in LoginMixin so what where should it take user if not login 
     
     def get_queryset(self):
-        return Post.objects.filter(published_date__isnull=True).order_by('-created_date')
-        
+        return Post.objects.filter(contribute__isnull=True, published_date__isnull=True).order_by('-created_date')
 
+######## CONTRIBUTE #########
+
+class ContributePost(CreateView):
+    model = Post
+    fields = ('contribute', 'title','content',)
+    success_url = reverse_lazy('blog:post_list')
+
+class ContributePostList(ListView):
+    model = Post
+    template_name = 'blog/contribute_manage.html'
+    login_url = '/blog/login'
+    context_object_name = 'draft_list'
+    redirect_field_name = login_url 
+
+    def get_queryset(self):
+        return Post.objects.filter(contribute__isnull=False, published_date__isnull=True)
 ######## COMMENT ########
 
 # Using the HTML form(Input-name values), Not Django In-Built Form
+
+class PendingCommentsList(ListView):
+    model = Comment
+    template_name = 'blog/pending_comments.html'
+
+    def get_queryset(self):
+        return Comment.objects.filter(status = False)
+
+
 def create_comment(request, pk):
     all_comments = Comment.objects.all() 
 

@@ -15,8 +15,11 @@ urlpatterns = [
      path('posts/<int:pk>/comment/', views.create_comment, name='create_comment'),
      path('posts/<int:pk>/comment/delete/', views.delete_comment,name='delete_comment'),
      path('posts/<int:pk>/comment/approve/', views.approve_comment, name='approve_comment'),
+     path('posts/admin/pending-comments/', views.PendingCommentsList.as_view(), name='pending_comments'),
      path('draft/', views.DraftListView.as_view(), name='draft'),
-     path('draft/publish/<int:pk>/', views.post_publish, name='publish')
+     path('draft/publish/<int:pk>/', views.post_publish, name='publish'),
+     path('contribute/', views.ContributePost.as_view(),name='contribute'),
+     path('draft/contributions/', views.ContributePostList.as_view(), name="contribute_list")
      
 
  ]

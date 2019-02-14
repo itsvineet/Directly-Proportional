@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+{% if comment_list %}
+
+    {% for comment in comment_list %}
+        {% if comment.status == False %}
+            <p>
+                    <div class="Post">
+                              <a href="{% url 'blog:post_detail' pk=comment.post_name.id %}"> {{comment.post_name.title}}</a>  
+                    </div>
+                    <div class="comment">
+                        <strong>Author:</strong> {{comment.author}} <br>
+                        <strong>Comment:</strong> {{comment.comment_text}}<br>
+                        <a href="{% url 'blog:approve_comment' pk=comment.id %}">Approve</a>
+
+                    </div>
+
+            </p>
+        {% endif %}
+    {% endfor %}
+
+{% else %}
+
+<p>No Comments to approve!!!</p>
+
+{% endif %}
+
+
+
+
+{% endblock %}

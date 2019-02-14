@@ -3,12 +3,14 @@
 {% block content %}
 <ul>
     <li><a href="{% url 'blog:post_list' %}">Posts</a></li>  
+    <li><a href="{% url 'blog:contribute' %}">Contribute</a></li>
     
     
     {% if user.is_authenticated %}
          <li>Hi, {{user.username}}</li>
          <li><a href="{% url 'blog:create_post'%}">Create Post</a></li>
          <li><a href="{% url 'blog:draft' %}">Draft</a></li>
+         <li><a href="{% url 'blog:pending_comments' %}">Pending Comments</a></li>
          
          <a href="{% url 'logout' %}">logout</a>
 
