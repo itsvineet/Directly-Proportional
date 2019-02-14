@@ -16,9 +16,10 @@ class Post(models.Model):
     content = models.TextField()
     created_date = models.DateTimeField(default=datetime.datetime.now())
     published_date = models.DateTimeField(blank=True, null=True)
-
+   
     def publish(self):
         self.published_date = datetime.datetime.now()
+        self.save()
 
     def get_absolute_url(self):
         return reverse('blog:draft')
@@ -31,7 +32,11 @@ class Comment(models.Model):
     post_name = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.CharField(max_length=256, default="NO NAME")
     comment_text = models.TextField()
+    status = models.BooleanField(default=False)
 
+    def approve(self):
+        self.status = True
+        self.save()
 
 
      

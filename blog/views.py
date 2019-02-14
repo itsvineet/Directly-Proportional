@@ -92,6 +92,14 @@ def delete_comment(request, pk):
     comment.delete()
     return redirect('blog:post_detail', pk=comment.post_name.pk)
 
+@login_required
+def approve_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    comment.save()
+    return redirect('blog:post_detail', pk=comment.post_name.pk)
+
+
 ########### Post Publish (Publish the post by providing the publication date) ########
 
 @login_required
