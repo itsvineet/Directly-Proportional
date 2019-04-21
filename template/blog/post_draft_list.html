@@ -3,30 +3,35 @@
 {% block content %}
 
 
+<!-- <a class="btn btn-primary" href="{% url 'blog:contribute_list' %}">Contributions</a> -->
+
 {% if draft_list %}
-<h1>jhsdvkusdv</h1>
-<a href="{% url 'blog:contribute_list' %}">Contributions</a>
     {% for draft in draft_list %}
-        
-            
-    `       <p>
-                <div class="Post">
-                      <h1><a href="{% url 'blog:post_detail' pk=draft.pk %}"> {{draft.title}} </a></h1>
-                       <a href="{% url 'blog:publish' pk=draft.pk %}">Publish</a>
-                       <a href="{% url 'blog:delete_post' pk=draft.pk %}">Delete</a>
-                       <a href="{% url 'blog:update_post' pk=draft.pk %}">Update</a>
-                       
-                </div>
-            </p>
+
+                <div class="post">
+                        <h2 class="title">{{draft.title}}</h2>
+                        <p class="post-meta">{{post.published_date|date:"d M,Y"}} <a href="#">By Vineet Khandelwal</a></p>
+                      
+    
+                    <p class="desc"> 
+                            {{draft.content|striptags|truncatechars:200}}
+                            <a href="{% url 'blog:post_detail' pk=draft.pk %}">Read more</a>
+    
+                    </p>
+                    <a class="btn btn-success" href="{% url 'blog:publish' pk=draft.pk %}">Publish</a> 
+                    <a class="btn btn-danger" href="{% url 'blog:delete_post' pk=draft.pk %}">Delete</a>
+                    <a class="btn btn-warning" href="{% url 'blog:update_post' pk=draft.pk %}">Update</a> 
+
+            </div> <!--post -->
        
     {% endfor %}
-
 {% else %}
-<p>No Posts</p>
+<div class="container">
+    <p>No Posts In Draft List</p>
+</div>
 
-    
 {% endif %}
-<h1> You are in post_draft_list.html</h1>
+<!-- <h1> You are in post_draft_list.html</h1> -->
 
 
 {% endblock %}

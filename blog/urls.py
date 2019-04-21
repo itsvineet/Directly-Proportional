@@ -6,6 +6,7 @@ app_name = 'blog'
 
 urlpatterns = [
      path('', views.home,name='home'), 
+     path('aboutme/', views.aboutme, name='about_me'),
      path('signup/', views.SignUpView.as_view(), name='signup'),
      path('create-post/', views.CreatePostView.as_view(), name='create_post'),
      path('posts/', views.PostListView.as_view(), name='post_list'),
@@ -19,7 +20,11 @@ urlpatterns = [
      path('draft/', views.DraftListView.as_view(), name='draft'),
      path('draft/publish/<int:pk>/', views.post_publish, name='publish'),
      path('contribute/', views.ContributePost.as_view(),name='contribute'),
-     path('draft/contributions/', views.ContributePostList.as_view(), name="contribute_list")
+     path('draft/contributions/', views.ContributePostList.as_view(), name="contribute_list"),
+     path('draft/contributions/<int:pk>/', views.ContributeDeleteView.as_view(), name="delete_contribute"),
+     path('contribute/success', views.contribute_success,name="contribute_success"),
+     
+
      
 
  ]

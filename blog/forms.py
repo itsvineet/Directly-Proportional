@@ -1,9 +1,26 @@
-# from django.forms import ModelForm
-# from .models import Comment
+from django import forms
+from .models import Comment, Post
 
-# class CommentForm(ModelForm):
+
+class ContributeForm(forms.ModelForm):
     
-#     class Meta():
+    class Meta:
+        model = Post
+        fields = ('contribute', 'title','content',)
+        widgets = {
+            'contribute' : forms.TextInput(attrs={'class':'form-control textinputclass','placeholder':'Name' }),
+            'title' : forms.TextInput(attrs={'class':'form-control textinputclass','placeholder':'Title' }),
+            'content' : forms.Textarea(attrs={'class':'editable medium-editor-textarea'})
+        }
     
-#         model = CommentForm
-#         fields = "__all__"+ v
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('title', 'content', )
+        widgets = {
+            'title' : forms.TextInput(attrs={'class':'form-control textinputclass','placeholder':'Title' }),
+            'content' : forms.Textarea(attrs={'class':'editable medium-editor-textarea'})
+        }
+
+

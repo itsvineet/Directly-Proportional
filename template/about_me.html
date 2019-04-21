@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <h1 class="about-title">About Me</h1>
+    <img class="profile-photo" src="{% static 'images/profile_2.jpg' %}"  alt="Profile photo" >
+
+
+
+<p>Hi, its VIneet Khandelwal. I am Computer Science graduate and currently working in Pyhton and Django.
+    I believe that learning never ends and everyday we learn new things. </p>
+
+<p> This idea resulted in creation of this website. This whole journey comes as a learning curve. Through this 
+    I can share whatever knowledge I have gained throughout my journey. 
+</p>
+<p>
+    Also giving other enthusiast a platform to share their knowledge with the moto - "Lets Learn Together".
+    Acknowledgement of your contribution will be shared. 
+    <div class="sidebar-anchor">
+            <a class="btn btn-primary" href="{% url 'blog:contribute' %}">CONTRIBUTE NOW</a>
+    </div>
+</p>
+
+<p>
+    This website is in its early stages. It will be improved with time and as my skills increase. Help this platform improve by Contributing and share idea on email provided below. I have used 
+    some resources which is shared by other peoples. So here is Acknowledgement list -
+    <ul class="list-unstyled">
+            <li>Medium-Editor <a href="https://github.com/yabwe/medium-editor/blob/master/LICENSE">License</a>  </li>
+            <li>CSS Tutorial Videos</li>
+            <li>Online Django Courses</li>
+    </ul>
+    
+</p>
+<p>
+Technology Used in this website
+<ul class="list-unstyled">
+<li>Python <a href="https://www.python.org/">Website</a></li>
+<li>Django <a href="https://www.djangoproject.com/">Website</a></li>
+<li>Bootstrap <a href="https://getbootstrap.com/">Website</a></li>
+
+
+</ul>
+Happy Coding!!
+</p>
+<p>
+    for any query contact: vineetkhandelwal29@gmail.com
+
+</p>
+
+
+{% endblock %}

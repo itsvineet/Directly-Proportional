@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
 from .models import Post, Comment
+from .forms import PostForm, ContributeForm
+
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -21,11 +23,21 @@ class SignUpView(CreateView):
 #########  POST ###########
 
 def home(request):
-    return render(request, 'home.html')
+    # return render(request, 'home.html')
+    response = redirect('/blog/posts/')
+    return response
+
+def aboutme(request):
+    return render(request, 'about_me.html')
 
 
 class PostListView(ListView):
     model = Post
+    context_object_name = 'post_list'
+    ordering = '-published_date'
+    paginate_by = 5
+    
+
 
 class PostDetailView(DetailView):
     model = Post
@@ -37,12 +49,13 @@ class PostDetailView(DetailView):
         return context
 
 class CreatePostView(LoginRequiredMixin, CreateView):
+    form_class = PostForm
     model = Post
-    fields = ('title', 'content',)
+    # fields = ('title', 'content',)
 
 class PostDeleteView(DeleteView):
     model = Post
-    success_url = reverse_lazy('blog:post_list')
+    success_url = reverse_lazy('blog:draft')
 
 class PostUpdateView(UpdateView):
     model = Post
@@ -61,9 +74,12 @@ class DraftListView(LoginRequiredMixin, ListView):
 ######## CONTRIBUTE #########
 
 class ContributePost(CreateView):
+   
+    form_class = ContributeForm
     model = Post
-    fields = ('contribute', 'title','content',)
-    success_url = reverse_lazy('blog:post_list')
+    # fields = ('contribute', 'title','content',)
+    success_url = reverse_lazy('blog:contribute_success')
+    success_message = 'Thanks for Contribution'
 
 class ContributePostList(ListView):
     model = Post
@@ -74,6 +90,14 @@ class ContributePostList(ListView):
 
     def get_queryset(self):
         return Post.objects.filter(contribute__isnull=False, published_date__isnull=True)
+
+def contribute_success(request):
+    return render(request, 'blog/contribute_success.html')
+
+class ContributeDeleteView(PostDeleteView):
+    success_url = reverse_lazy('blog:contribute_list')
+
+
 ######## COMMENT ########
 
 # Using the HTML form(Input-name values), Not Django In-Built Form
@@ -90,23 +114,19 @@ def create_comment(request, pk):
     all_comments = Comment.objects.all() 
 
     if request.method == "POST":
-        author = request.POST.get('author')
+        # austhor = request.POST.get('author')
         comment_text = request.POST.get('comment_text')
-        #print(author, comment_text)
-        if comment_text: # Give Author default value
-            # comment_object = Comment()
-            # comment_object.author = author
-            # comment_object.comment_text = comment_text
-            post = get_object_or_404(Post, pk=pk)
-            if author == '':
-                author = 'Anonymous'
-            comment = Comment(post_name=post, author = author, comment_text = comment_text)
-            comment.save()
-            #return redirect('blog:post_detail', pk = post.pk)
 
-    #return HttpResponseRedirect(request.path_info) 
+        if comment_text: # Give Author default value
+            post = get_object_or_404(Post, pk=pk)
+            # if author == '':
+            #     author = 'Anonymous'
+            comment = Comment(post_name=post, comment_text = comment_text)
+            comment.save()
+            
+
     return redirect('blog:post_detail', pk=pk) # Calling the Post_Detail View by Passing pk value
-    #return HttpResponseRedirect('/blog')
+    
 
 @login_required
 def delete_comment(request, pk):

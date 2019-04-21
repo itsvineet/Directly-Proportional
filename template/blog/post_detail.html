@@ -1,61 +1,96 @@
-{% extends 'base.html'%}
+  {% extends 'base.html'%}
+
+
 {% block content %}
 
+<div class="post-detail">
+<div class="container">
+        <h2> {{object.title }} </h2> 
+        {% if object.contribute %}
+        
+        <p>-by {{object.contribute}}</p>
+        {% endif %}
+</div>
+        
+<div class="container">
+                
+{{object.content|safe}}
 
-<h2>{{object.title }}</h2> 
-<p>-by {{object.contribute}}</p>
-
-<p>{{object.content }}</p>
+</div>
 
 {% if user.is_authenticated %}
         <p>
-                <a href="{% url 'blog:delete_post' pk=object.pk %}">Delete</a>
-                <a href="{% url 'blog:update_post' pk=object.pk %}">Update</a>
+                <a class="btn btn-danger" href="{% url 'blog:delete_post' pk=object.pk %}">Delete</a>
+                <a class="btn btn-warning" href="{% url 'blog:update_post' pk=object.pk %}">Update</a>
         </p>
+
 {% endif %}
 
-<form action="{% url 'blog:create_comment' pk=object.pk %}" method="POST">
-        {% csrf_token %}
-        <label for="author">Username:</label><input type="text" name='author'>
-        <label for="comment_text">Comment:</label><input type="text" name='comment_text'>
-        <button type="submit">Comment</button>
-</form>      
 
-<h2>Commments:</h2>
+        
+</div>      <!-- post -->
+
+<div class="create-comment">
+        <form class="" action="{% url 'blog:create_comment' pk=object.pk %}" method="POST">
+                {% csrf_token %}
+        <!-- <div class="form-group">
+                <label for="author">Username:</label>
+                <input class="form-control" value="Anonymous" id="username" type="text" name='author'>
+        </div>  -->
+       
+        <div class="form-group">
+                <!-- <label for="comment">Comment:</label> -->
+                <textarea class="form-control" placeholder="Create your comment here..." rows="3" name='comment_text' id="comment"></textarea>
+        </div>
+
+        <button class = "btn btn-primary"type="submit">Comment</button>
+        </form>
+</div>
+
+<div class="Commments">
+
 
 {% if all_comments %}
-
+<p>Comments:</p>
         {% for comment in all_comments %}
                 {% if comment.post_name.id == object.id %}
-                       
-                        {% if comment.status == False %}
-                                {% if user.is_authenticated %}
-                                        <P><strong>Author:</strong>{{comment.author}} <br>
-                                        <strong>Comment:</strong>{{comment.comment_text}}
-                                        <a href="{% url 'blog:approve_comment' pk=comment.pk %}">Approve</a>
-                                        <a href="{% url 'blog:delete_comment' pk=comment.pk %}">Delete</a>
-                                        </P>                
-                                {% endif %}
-
-                        {% else %}
-                                <ol>
-                                <li>
-                                <strong>Author:</strong>{{comment.author}} <br>
+                
+                {% if comment.status == False %}
+                        {% if user.is_authenticated %}
+                        <div class="comments">
+                               <strong>Author:</strong>{{comment.author}} <br>
                                 <strong>Comment:</strong>{{comment.comment_text}}
-                                </li>
+                                <a class="btn btn-success" href="{% url 'blog:approve_comment' pk=comment.pk %}">Approve</a>
+                                <a class="btn btn-danger" href="{% url 'blog:delete_comment' pk=comment.pk %}">Delete</a>
                         
-                                {% if user.is_authenticated %}
-                                        <a href="{% url 'blog:delete_comment' pk=comment.pk %}">Delete</a>
-                                {% endif %}
-                                </ol>            
+                        </div>
+                                                
                         {% endif %}
+
+                {% else %}
+
+                        <ol class="list-unstyled">
+                        <li>
+                        <strong>{{comment.author}}</strong> <br>
+                        <strong></strong>{{comment.comment_text}}
+                        </li>
+                
+                        {% if user.is_authenticated %}
+                                <a class="btn btn-danger" href="{% url 'blog:delete_comment' pk=comment.pk %}">Delete</a>
+                        {% endif %}
+                        </ol>            
+                {% endif %}
                 {% endif %}
         {% endfor %}
+
 {% else %}
 
-<p>No Comments</p>
+<p>No comments</p>
 
 {% endif %}
 
 
+</div>
+
 {% endblock %}
+

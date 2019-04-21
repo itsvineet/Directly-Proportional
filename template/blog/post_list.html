@@ -2,30 +2,45 @@
 
 {% block content %}
 
-{% if post_list %}
 
     {% for post in post_list %}
         {% if post.published_date %}
-            <p>
-                    <div class="Post">
-                        <h2><a href="{% url 'blog:post_detail' pk=post.pk %}"> {{post.title}} </a> </h2>
-                        
-                        <h4>{{post.published_date|date:"d M,Y"}}</h4>
-                    </div>
-                    
+            
+     
+            <div class="post">
+                <h2 class="title"><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title|safe}}</a></h2>
 
-            </p>
+                <p class="post-meta">{{post.published_date|date:"d M,Y"}} <a href="#">{{post.author}}</a></p>
+                  
+                <div class="fakeimg">Fake Image</div>
+
+                <p class="desc"> 
+                        {{post.content|striptags|truncatechars:300}} 
+                        <a href="{% url 'blog:post_detail' pk=post.pk %}">Read more</a>
+                </p>
+            </div> <!--post -->
+       
         {% endif %}
     {% endfor %}
 
-{% else %}
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+          <a class="btn btn-outline-info md-4" href="?page=1">First</a>
+          <a class="btn btn-outline-info md-4" href="?page={{ page_obj.previous_page_number}}">Previous</a>
+        {% endif %}
+        
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <a class="btn btn-info md-4" href="?page={{ num }}"> {{ num }}</a>
+            
+          {% endif %}
+        {% endfor %}
+        
+        {% if page_obj.has_next %}
+          <a class="btn btn-outline-info md-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+          <a class="btn btn-outline-info md-4" href="?page={{ page_obj.paginator.num_pages}}">Last</a>
+        {% endif %}
 
-<p>No Posts</p>
-
-{% endif %}
-
-<h1> You are in post_list.html</h1>
-
-
+    {% endif %}
 
 {% endblock %}

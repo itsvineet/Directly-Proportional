@@ -31,9 +31,9 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post_name = models.ForeignKey(Post, on_delete=models.CASCADE)
-    author = models.CharField(max_length=256, default="NO NAME")
-    comment_text = models.TextField()
-    status = models.BooleanField(default=False)
+    author = models.CharField(max_length=256, default="Anonymous")
+    comment_text = models.TextField(max_length=500)
+    status = models.BooleanField(default=True)
 
     def approve(self):
         self.status = True

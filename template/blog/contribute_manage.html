@@ -11,7 +11,7 @@
                     <h2>Contributor name: {{draft.contribute}}</h2>
                     <h3><a href="{% url 'blog:post_detail' pk=draft.pk %}"> {{draft.title}} </a></h3>
                        <a href="{% url 'blog:publish' pk=draft.pk %}">Publish</a>
-                       <a href="{% url 'blog:delete_post' pk=draft.pk %}">Delete</a>
+                       <a href="{% url 'blog:delete_contribute' pk=draft.pk %}">Delete</a>
                        <a href="{% url 'blog:update_post' pk=draft.pk %}">Update</a>
                        
                 </div>
