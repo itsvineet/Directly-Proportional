@@ -1,46 +1,74 @@
 {% extends 'base.html'%}
+{% load staticfiles %}
 
 {% block content %}
-
-
-    {% for post in post_list %}
-        {% if post.published_date %}
-            
-     
-            <div class="post">
-                <h2 class="title"><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title|safe}}</a></h2>
-
-                <p class="post-meta">{{post.published_date|date:"d M,Y"}} <a href="#">{{post.author}}</a></p>
-                  
-                <div class="fakeimg">Fake Image</div>
-
-                <p class="desc"> 
-                        {{post.content|striptags|truncatechars:300}} 
-                        <a href="{% url 'blog:post_detail' pk=post.pk %}">Read more</a>
-                </p>
-            </div> <!--post -->
        
-        {% endif %}
-    {% endfor %}
+     <section id="main">
+      <div class="container">
+        <article id="main-col" class="">
+          <h1 class='page-title'>Latest Posts</h1>
 
-    {% if is_paginated %}
-        {% if page_obj.has_previous %}
-          <a class="btn btn-outline-info md-4" href="?page=1">First</a>
-          <a class="btn btn-outline-info md-4" href="?page={{ page_obj.previous_page_number}}">Previous</a>
+          {% for post in post_list %}
+          {% if post.published_date %}          
+
+          <h1 class="title"><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title|safe}}</a></h1>
+
+          <h4 class="post-meta">{{post.published_date|date:"d M,Y"}} <a href="#">{{post.author}}</a></h4>
+          <p class="dark"> 
+            {{post.content|striptags|truncatechars:300}} 
+            <a class="read-more" href="{% url 'blog:post_detail' pk=post.pk %}">Read more</a>
+          </p>
+  
+          
         {% endif %}
-        
-        {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-            <a class="btn btn-info md-4" href="?page={{ num }}"> {{ num }}</a>
-            
-          {% endif %}
         {% endfor %}
-        
-        {% if page_obj.has_next %}
-          <a class="btn btn-outline-info md-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-          <a class="btn btn-outline-info md-4" href="?page={{ page_obj.paginator.num_pages}}">Last</a>
-        {% endif %}
 
-    {% endif %}
+        <p>
+            {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                  <a class="button_1" href="?page=1">First</a>
+                  <a class="button_1" href="?page={{ page_obj.previous_page_number}}">Previous</a>
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                  {% if page_obj.number == num %}
+                    <a class="button_!" href="?page={{ num }}"> {{ num }}</a>
+                    
+                  {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                  <a class="button_1" href="?page={{ page_obj.next_page_number }}">Next</a>
+                  <a class="button_1" href="?page={{ page_obj.paginator.num_pages}}">Last</a>
+                {% endif %}
+        
+            {% endif %}
+          </p>
+        </article>
+
+        <aside id="sidebar">
+            <div class="dark">
+              
+                <h3>About Me</h3>
+                <!-- <div class="fakeimg">Fake Image</div> -->
+                <!-- <img class="profile-photo" src="{% static 'images/profile_2.jpg' %}"  alt="Profile photo" > -->
+  
+                <p><b>Vineet Khandelwal</b> is a Computer Science graduate and currently, <b>Python</b> and <b>Django</b> is his main domain. The main motive of this website is to help others and give other enhusiasts platform who also shares the same motive...<a class="read-more" href="{% url 'blog:about_me' %}">Read More</a></p>
+            </div>
+            <div class="dark">
+                <h2>Contribute</h2>
+                <p>Through Contribution you can share your knowledge with other enthusiast around the world and help the community of python and Django grow. Your Contibution will be Acknowledge.So We encourage you to contribute now</p>
+                <div>
+                <a class="button_1" href="{% url 'blog:contribute' %}">CONTRIBUTE NOW</a>
+                </div>
+            </div>
+        </aside>
+   
+       
+
+   
+
+  </div>
+</section>
 
 {% endblock %}
