@@ -51,7 +51,14 @@ class PostDetailView(DetailView):
 class CreatePostView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
-    # fields = ('title', 'content',)
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        # obj.user = self.request.user
+        obj.contribute = "Vineet Khandelwal"
+        obj.save()
+        return HttpResponseRedirect(obj.get_absolute_url())
+
 
 class PostDeleteView(DeleteView):
     model = Post
@@ -69,7 +76,7 @@ class DraftListView(LoginRequiredMixin, ListView):
     redirect_field_name = login_url              # Used in LoginMixin so what where should it take user if not login 
     
     def get_queryset(self):
-        return Post.objects.filter(contribute__isnull=True, published_date__isnull=True).order_by('-created_date')
+        return Post.objects.filter(contribute="Vineet Khandelwal", published_date__isnull=True).order_by('-created_date')
 
 ######## CONTRIBUTE #########
 
@@ -77,7 +84,6 @@ class ContributePost(CreateView):
    
     form_class = ContributeForm
     model = Post
-    # fields = ('contribute', 'title','content',)
     success_url = reverse_lazy('blog:contribute_success')
     success_message = 'Thanks for Contribution'
 

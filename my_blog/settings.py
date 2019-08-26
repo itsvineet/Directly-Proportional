@@ -122,10 +122,17 @@ USE_TZ = True
 
 #AUTH_USER_MODEL = 'core.User'
 
+
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #STATIC_ROOT = 'static/blog/css'
+
+# Media Files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'

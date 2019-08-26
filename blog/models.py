@@ -1,7 +1,10 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
 import datetime
+
 
 # Create your models here.
 
@@ -11,9 +14,21 @@ import datetime
 
 ########################
 
+
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     location = models.CharField(max_length=30, blank=True)
+#     birthdate = models.DateField(null=True, blank=True)
+#     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
+
+#     def __str__(self):  # __unicode__ for Python 2
+#         return self.user.username
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
+    image = models.ImageField(upload_to='blog_images/', null=True)
     created_date = models.DateTimeField(default=datetime.datetime.now())
     published_date = models.DateTimeField(blank=True, null=True)
     contribute = models.CharField(max_length=50, null=True)
