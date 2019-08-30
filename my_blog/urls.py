@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='/blog/')),
     path('blog/', include('blog.urls')),
+    # path('ckdeditor', include('ckeditor_uploader.urls')),
     path('blog/', include('django.contrib.auth.urls')),
 ]
 

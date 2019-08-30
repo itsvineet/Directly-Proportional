@@ -1,20 +1,58 @@
-  {% extends 'base.html'%}
-
+{% extends 'base.html'%}
+{% load static %}
 
 {% block content %}
-<article class="container article-body">
 
-        <div >
+<section class="card container_1 create-section ">
+               
+        <div class=" post-author">
+                <div class="author-picture">
+                        <img class="profile-photo" src="{% static 'images/profile_2.jpg' %}"  alt="Vineet Khandelwal" >
 
-                <h1> {{object.title }} </h1> 
+                </div>
+                <div class="author-info">
+                        <p class="name">By <strong>Vineet Khandelwal</strong></p>
+                        <p class="bio">
+                        I'm a passionate software developer and technology enthusiast from India. I write about
+                        Python, Django and Web Development. <a href="{% url 'blog:about_me' %}"">Read more</a>.
+                        </p>
+                       
+                </div>
+        
+        </div>
+</section>
+
+<article class="container_1 article-body">
+
+        <div>
+                <div class="post-content-centre">
+                        <p class="title"> {{object.title }} </p> 
+                </div>
                 {% if object.contribute %}
                 
                 <p class="author">-by {{object.contribute}}</p>
                 {% endif %}
-                        
+                   
                 <img src="{{object.image.url}}">
-               <p class="article-text"> {{object.content|safe}} </p>
-
+                <div class="text">
+                        <p> {{object.content|safe}} </p>
+                </div>
+                <div class="social">
+                        <div class="fb-share-button" 
+                        data-href="{{request.build_absolute_url}}" 
+                        data-layout="button" data-size="small" data-mobile-iframe="false">
+                           <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share
+                           </a>
+                        </div>
+                        
+                                <a id="twitter-wjs" class="twitter-share-button" href="https://twitter.com/intent/tweet">
+                                Tweet
+                                </a>
+                                                
+                        <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+                        <script type="IN/Share" data-url="{{request.build_absolute_url}}"></script>
+                        
+                </div>
         </div>
 
 </article>
@@ -27,13 +65,13 @@
 
 {% endif %}
 
-<article class="container article-body">
+<article class="container_1 article-body">
 
         <div>
                 <form class="" action="{% url 'blog:create_comment' pk=object.pk %}" method="POST">
                         {% csrf_token %}    
                         <textarea class="" placeholder="Leave a Commment" rows="3" required name='comment_text' id="comment"></textarea><br>
-                        <button class="button_1" type="submit">Comment</button>
+                        <button class="button_2" type="submit">Comment</button>
                 </form>
         </div>
         

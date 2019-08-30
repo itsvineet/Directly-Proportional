@@ -38,7 +38,39 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'widget_tweaks',
+    'ckeditor',
+    # 'ckeditor_uploader',
 ]
+
+# CKEDITOR_UPLOADER_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    "default" : {
+        "toolbar" : "Custom",
+        "height" : 500,
+        "toolbar_Custom" : [
+            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+            ['CodeSnippet'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Flash', 'Table', 'HorizontalRule'],
+            ['TextColor', 'BGColor'],
+            ['Smiley', 'SpecialChar'], ['Source']
+        ],
+         "extraPlugins" : 'codesnippet',
+    },
+      "special" : {
+        "toolbar" : "Special",
+        "height" : 300,
+        "toolbar_Special" : [
+            ["Bold", "CodeSnippet",]
+        ],
+        "extraPlugins" : 'codesnippet',
+    },
+}
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,8 +157,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#STATIC_ROOT = 'static/blog/css'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Media Files
 MEDIA_URL = '/media/'
@@ -136,3 +168,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+# location static{
+#     alias /home/mysite/static;
+# }
+
+# location media{
+#     alias /home/mysite/media;
+# }
+
+CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, 'uploads')
+# CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+# CKEDITOR_MEDIA_PREFIX  = "/media/ckeditor/"
+# CKEDITOR_UPLOAD_PREFIX = "http://fortezzeimperiali/media/uploads/"
+# CKEDITOR_RESTRICT_BY_USER = True
+# CKEDITOR_IMAGE_BACKEND = "pillow"

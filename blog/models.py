@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 import datetime
 
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -27,7 +29,9 @@ import datetime
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    # content = models.RichTextField()
+    content = RichTextField(blank=True, null=True, config_name="default")
+    # content = RichTextUploadingField(blank=True, null=True)  # its for image uploading functionality
     image = models.ImageField(upload_to='blog_images/', null=True)
     created_date = models.DateTimeField(default=datetime.datetime.now())
     published_date = models.DateTimeField(blank=True, null=True)
@@ -49,6 +53,7 @@ class Comment(models.Model):
     author = models.CharField(max_length=256, default="Anonymous")
     comment_text = models.TextField(max_length=500)
     status = models.BooleanField(default=True)
+    published_date = models.DateTimeField(default=datetime.datetime.now())
 
     def approve(self):
         self.status = True

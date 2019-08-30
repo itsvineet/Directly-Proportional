@@ -4,50 +4,72 @@
 {% block content %}
 
 
-    <h1 class="about-title">About Me</h1>
-    <img class="profile-photo" src="{% static 'images/profile_2.jpg' %}"  alt="Profile photo" >
+<section id="main">
+    <div class="container ">
+        <article id="main-col" >
+
+        <h1 class="about-title">About Me</h1>
+        <div class="create-section about-me-page">
+            <p>Hi, its VIneet Khandelwal. I am Computer Science graduate and currently working in Pyhton and Django. I believe that learning never ends and everyday we learn new things. This idea resulted in creation of this website. This whole journey comes as a learning curve. Through this 
+                I can share whatever knowledge I have gained throughout my journey. Also giving other enthusiast a platform to share their knowledge with the moto - "Lets Learn Together".
+                Acknowledgement of your contribution will be shared. 
+            </p>
+
+            <p>
+                This website is in its early stages. It will be improved with time and as my skills increase. Help this platform improve by Contributing and share idea on email provided below. I have used 
+                some resources which is shared by other peoples. So here is Acknowledgement list -
+                <ul>
+                        <li>Medium-Editor <a href="https://github.com/yabwe/medium-editor/blob/master/LICENSE">License</a>  </li>
+                        <li>CSS Tutorial Videos</li>
+                        <li>Online Django Courses</li>
+                </ul>
+                
+            </p>
+            <p>
+            Technology Used in this website
+            <div class="unstyled-list"> 
+                <ul>
+
+                <li>Python <a href="https://www.python.org/">Website</a></li>
+                <li>Django <a href="https://www.djangoproject.com/">Website</a></li>
+                <li>Bootstrap <a href="https://getbootstrap.com/">Website</a></li>
 
 
+                </ul>   
+            </div>
 
-<p>Hi, its VIneet Khandelwal. I am Computer Science graduate and currently working in Pyhton and Django.
-    I believe that learning never ends and everyday we learn new things. </p>
+            Happy Coding!!
+            </p>
+            <p>
+                for any query contact: vineetkhandelwal29@gmail.com
 
-<p> This idea resulted in creation of this website. This whole journey comes as a learning curve. Through this 
-    I can share whatever knowledge I have gained throughout my journey. 
-</p>
-<p>
-    Also giving other enthusiast a platform to share their knowledge with the moto - "Lets Learn Together".
-    Acknowledgement of your contribution will be shared. 
-    <div class="sidebar-anchor">
-            <a class="btn btn-primary" href="{% url 'blog:contribute' %}">CONTRIBUTE NOW</a>
+            </p>
+        </div>
+        </article>
+
+        <aside id="sidebar">
+
+            <div class="dark">
+            <h3>About Me</h3>
+            <!-- <div class="fakeimg">Fake Image</div> -->
+            <!-- <img class="profile-photo" src="{% static 'images/profile_2.jpg' %}"  alt="Profile photo" > -->
+            <p>
+                <b>Vineet Khandelwal</b> is a Computer Science graduate and currently, <b>Python</b> and <b>Django</b> is his main domain. The main motive of this website is to help others and give other enhusiasts platform who also shares the same motive...
+                <p><a class="read-more" href="{% url 'blog:about_me' %}">Read More</a>
+            </p>
+            </div>
+
+            <div class="dark">
+            <h2>Contribute</h2>
+            <p>Through Contribution you can share your knowledge with other enthusiast around the world and help the community of python and Django grow. Your Contibution will be Acknowledge.So We encourage you to contribute now</p>
+            <div>
+                <a class="button_1" href="{% url 'blog:contribute' %}">CONTRIBUTE NOW</a>
+            </div>
+            </div>
+        </aside>
+
     </div>
-</p>
 
-<p>
-    This website is in its early stages. It will be improved with time and as my skills increase. Help this platform improve by Contributing and share idea on email provided below. I have used 
-    some resources which is shared by other peoples. So here is Acknowledgement list -
-    <ul class="list-unstyled">
-            <li>Medium-Editor <a href="https://github.com/yabwe/medium-editor/blob/master/LICENSE">License</a>  </li>
-            <li>CSS Tutorial Videos</li>
-            <li>Online Django Courses</li>
-    </ul>
-    
-</p>
-<p>
-Technology Used in this website
-<ul class="list-unstyled">
-<li>Python <a href="https://www.python.org/">Website</a></li>
-<li>Django <a href="https://www.djangoproject.com/">Website</a></li>
-<li>Bootstrap <a href="https://getbootstrap.com/">Website</a></li>
-
-
-</ul>
-Happy Coding!!
-</p>
-<p>
-    for any query contact: vineetkhandelwal29@gmail.com
-
-</p>
-
+</section>
 
 {% endblock %}
