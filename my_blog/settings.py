@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'widget_tweaks',
     'ckeditor',
+    # 'captcha', # Remove this module
     # 'ckeditor_uploader',
 ]
 
@@ -70,7 +71,15 @@ CKEDITOR_CONFIGS = {
 }
 
 
+from django.contrib.messages import constants as messages
 
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,6 +140,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+GOOGLE_RECAPTCHA_SECRET_KEY = '6Lf09LUUAAAAAGiwc_cp3YZwWdIKs3v_pYlkkIuw'
 
 
 # Internationalization

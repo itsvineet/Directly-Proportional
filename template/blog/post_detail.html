@@ -30,7 +30,7 @@
                 </div>
                 {% if object.contribute %}
                 
-                <p class="author">-by {{object.contribute}}</p>
+                <p class="author">- {{object.contribute}} | <span>{{post.published_date|date:"d M,Y"}}</span></p>
                 {% endif %}
                    
                 <img src="{{object.image.url}}">

@@ -1,3 +1,8 @@
+import json
+import urllib
+from django.conf import settings
+from django.contrib import messages
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 
@@ -23,9 +28,8 @@ class SignUpView(CreateView):
 #########  POST ###########
 
 def home(request):
-    # return render(request, 'home.html')
-    response = redirect('/blog/posts/')
-    return response
+    
+    return render(request, 'home.html')
 
 def aboutme(request):
     return render(request, 'about_me.html')
@@ -80,12 +84,49 @@ class DraftListView(LoginRequiredMixin, ListView):
 
 ######## CONTRIBUTE #########
 
-class ContributePost(CreateView):
+# class ContributePost(CreateView):
    
-    form_class = ContributeForm
-    model = Post
-    success_url = reverse_lazy('blog:contribute_success')
-    success_message = 'Thanks for Contribution'
+#     form_class = ContributeForm
+#     model = Post
+#     success_url = reverse_lazy('blog:contribute_success')
+#     success_message = 'Thanks for Contribution'
+
+
+def contribute_post(request):
+    
+    if request.method == 'POST':
+        form = ContributeForm(request.POST)
+        if form.is_valid():
+
+            ''' Begin reCAPTCHA validation '''
+            # recaptcha_response = request.POST.get('g-recaptcha-response')
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            ''' End reCAPTCHA validation '''
+
+            if result['success']:
+                form.save()
+                messages.success(request, 'Success: Thanks for Contribution. Your Post will be listed after Review. Happy Coding :)')
+
+            else:
+                messages.error(request, 'Failed: Invalid reCAPTCHA. Please try again.')
+  
+            return redirect('blog:contribute')
+    else:
+        form = ContributeForm()
+
+    return render(request, 'blog/post_form.html', {'form': form})
+    
+
 
 class ContributePostList(ListView):
     model = Post

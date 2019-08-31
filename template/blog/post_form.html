@@ -2,23 +2,20 @@
 {% block content %}
 
 
-<section class="container create-section" >
-            
-
-        <!-- <form method="POST" enctype="multipart/form-data">
-            {%csrf_token%}
-
-            {{form.as_p}}
-            <button type="submit" class="button_2">Submit</button>
-
-        </form> -->
-               
+<section class="container create-section" >           
         
         {% load widget_tweaks %}
 
-            <form method="post"  enctype="multipart/form-data">
+            <form method="post"  enctype="multipart/form-data" autocomplete="off">
             {% csrf_token %}
                 {{form.media}}
+                {% if messages %}
+                    <ul class="messages dark">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
     
                 <div class="form-group">
                 <h3>Contributor's Name</h3>
@@ -28,10 +25,17 @@
                 {% render_field form.image class+="input-text" %}
                 <h3>Content</h3>
                 {% render_field form.content class+="input-textarea" %}
+             
+
+
                 <!-- {{ form.content|add_class:"input-textarea"|attr:"rows:20"  }} -->
                 {% if field.help_text %}
                     <small class="form-text text-muted">{{ field.help_text }}</small>
                 {% endif %}
+
+                
+                
+                <div class="g-recaptcha" data-sitekey="6Lf09LUUAAAAAOrlz_SP5WpyN-LdVczWzXDaCPnX"></div>
 
                 </div>
 

@@ -15,17 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin, auth
 from django.urls import path, include
-from django.views.generic import RedirectView
+# from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url='/blog/')),
-    path('blog/', include('blog.urls')),
+    # path('', RedirectView.as_view(url='/blog/')),
+
+    # path('blog/', include('blog.urls')),
+    path('', include('blog.urls')),
+    path('', include('django.contrib.auth.urls')),
+    
+
     # path('ckdeditor', include('ckeditor_uploader.urls')),
-    path('blog/', include('django.contrib.auth.urls')),
+    # path('blog/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

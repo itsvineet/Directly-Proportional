@@ -14,15 +14,14 @@
 
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-<!-- Medium like toolbar -->
-<!-- <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8"> -->
-
 <!-- highlight.js for showing code snippet on template -->
 <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+
+<!-- Captcha -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
 <!-- For Twitter -->
 
@@ -49,8 +48,8 @@
 
   <header>
     <div class="container">
-        <div id="branding">
-         <h1>Directly <span class="highlight">Proportional</span></h1>  
+        <div class="logo">
+         <a href="/" >Directly <span class="highlight">Proportional</span></a>  
         </div>
    
         <nav>
@@ -60,6 +59,10 @@
             </li> -->
             <li>
             <a href="{% url 'blog:home' %}">Home</a>
+            </li>
+            <li>
+              <a href="{% url 'blog:post_list' %}">Latest</a>
+            </li>
             <li>
               <a href="{% url 'blog:contribute' %}">Contribute</a>
             </li>

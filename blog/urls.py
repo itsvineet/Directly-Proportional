@@ -19,7 +19,9 @@ urlpatterns = [
      path('posts/admin/pending-comments/', views.PendingCommentsList.as_view(), name='pending_comments'),
      path('draft/', views.DraftListView.as_view(), name='draft'),
      path('draft/publish/<int:pk>/', views.post_publish, name='publish'),
-     path('contribute/', views.ContributePost.as_view(),name='contribute'),
+    #  path('contribute/', views.ContributePost.as_view(),name='contribute'),
+     path('contribute/', views.contribute_post,name='contribute'),
+
      path('draft/contributions/', views.ContributePostList.as_view(), name="contribute_list"),
      path('draft/contributions/<int:pk>/', views.ContributeDeleteView.as_view(), name="delete_contribute"),
      path('contribute/success', views.contribute_success,name="contribute_success"),

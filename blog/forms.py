@@ -1,5 +1,6 @@
 from django import forms
 from .models import Comment, Post
+# from captcha.fields import ReCaptchaField
 
 
 class ContributeForm(forms.ModelForm):

@@ -2,13 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-
-<section id="showcase">
-  <div class="container">
-      <h1>Forum for Python Enthusiasts </h1>
-      <p>Design is a work process which has a user perspective and drives development based on your specific customers’ needs. Methods and approaches differ depending on what you are developing but whether that involves processes in the healthcare sector or product development at a company</p>
-  </div>
-</section>
        
 <section id="main">
   <div class="container">
@@ -21,7 +14,7 @@
                 <div class="post-content-centre">
                   <p class="title"><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title|safe}}</a></p>
                 </div>
-                  <p class="post-meta">{{post.published_date|date:"d M,Y"}} |<span>{{post.author}}</span></p>
+                  <p class="post-meta">- {{post.contribute}} | <span>{{post.published_date|date:"d M,Y"}}</span></p>
                   <p class="content dark"> 
                     {{post.content|striptags|truncatechars:300| safe}} 
                   </p>
