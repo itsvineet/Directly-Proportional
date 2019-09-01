@@ -28,8 +28,13 @@ class SignUpView(CreateView):
 #########  POST ###########
 
 def home(request):
+    latest_post = Post.objects.filter(published_date__isnull=False).order_by("-published_date")[0:3]
+    context = {
+        'latest_post' : latest_post,
+        'hello' : 'context variable'
+    }
     
-    return render(request, 'home.html')
+    return render(request, 'home.html', context=context)
 
 def aboutme(request):
     return render(request, 'about_me.html')

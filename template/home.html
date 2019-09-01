@@ -8,79 +8,68 @@
       <div class="logo">
         <a href="/">Directly <span class="highlight">Proportional</span></a>  
        </div>
-       <p>"Python is the "most powerful language you can still read" - <span>Paul Dubois</span> </p>
+       <p>"Python is the most powerful language you can still read" - <span>Paul Dubois</span> </p>
   </div>
 </section>
-       
-<section id="main">
+
+<section id="latest-articles">
+    
   <div class="container">
-          <article id="main-col" class="">
-            <h1 class='page-title'>Latest Posts</h1>
+      <div class="all-latest">
 
-            {% for post in post_list %}
-              {% if post.published_date %}          
-            <div class="post-list create-section">
-                <div class="post-content-centre">
-                  <p class="title"><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title|safe}}</a></p>
-                </div>
-                  <p class="post-meta">{{post.published_date|date:"d M,Y"}} |<span>{{post.author}}</span></p>
-                  <p class="content dark"> 
-                    {{post.content|striptags|truncatechars:300| safe}} 
-                  </p>
-                  <div class="post-content-centre">
-                    <a class="read-more" href="{% url 'blog:post_detail' pk=post.pk %}">READ MORE</a>
-                  </div>
-              </div>
-              {% endif %}
-            {% endfor %}
-
-          <p>
-              {% if is_paginated %}
-              
-              {% if page_obj.has_previous %}
-                <a class="button_1" href="?page=1">First</a>
-                <a class="button_1" href="?page={{ page_obj.previous_page_number}}">Previous</a>
-              {% endif %}
-
-              {% for num in page_obj.paginator.page_range %}
-                {% if page_obj.number == num %}
-                  <a class="button_!" href="?page={{ num }}"> {{ num }}</a>
-                  
-                {% endif %}
-              {% endfor %}
-
-              {% if page_obj.has_next %}
-                <a class="button_1" href="?page={{ page_obj.next_page_number }}">Next</a>
-                <a class="button_1" href="?page={{ page_obj.paginator.num_pages}}">Last</a>
-              {% endif %}
-
-              {% endif %}
-          </p>
-
-        </article>
-
-        <aside id="sidebar">
-
-          <div class="dark">
-            <h3>About Me</h3>
-            <!-- <div class="fakeimg">Fake Image</div> -->
-            <!-- <img class="profile-photo" src="{% static 'images/profile_2.jpg' %}"  alt="Profile photo" > -->
-            <p>
-              <b>Vineet Khandelwal</b> is a Computer Science graduate and currently, <b>Python</b> and <b>Django</b> is his main domain. The main motive of this website is to help others and give other enhusiasts platform who also shares the same motive...
-              <p><a class="read-more" href="{% url 'blog:about_me' %}">Read More</a>
-            </p>
-          </div>
-
-          <div class="dark">
-            <h2>Contribute</h2>
-            <p>Through Contribution you can share your knowledge with other enthusiast around the world and help the community of python and Django grow. Your Contibution will be Acknowledge.So We encourage you to contribute now</p>
-            <div>
-              <a class="button_1" href="{% url 'blog:contribute' %}">CONTRIBUTE NOW</a>
-            </div>
-          </div>
-        </aside>
+          <h2>The latest</h2>
+          <p> Up-to-date articles about Python, Django and Web Development.</p>
+          <a class="" href="{% url 'blog:post_list'%}">See all latest</a>
+        
+      </div>
+     
+     
+        {% if latest_post %}
+          {% for post in latest_post %}
+          <div class="article-box">
+            <img class="image" src="{{post.image.url}}" alt="article-pic" width="90%" height="200">
+            <h3>{{post.title}}</h3>
+            <p>{{post.content|striptags|truncatechars:150| safe}}</p>
+          </div>       
+        
+          {% endfor %}
+        {% endif %}
 
   </div>
+  
 </section>
+
+
+<section id='contribute-section'>
+  
+    <h2>Get <span>Involved</span></h2>
+    <p>By contributing to the community, working with others. So that we will learn together.</p>
+    <a href="{% url 'blog:contribute' %}">Contribute Now</a>
+
+</section>
+
+
+<div id="about-me-section">
+<section class="card container_1 create-section ">
+               
+        <div class=" post-author">
+                <div class="author-picture">
+                        <img class="profile-photo" src="{% static 'images/Profile_photo.jpg' %}"  alt="Vineet Khandelwal" >
+
+                </div>
+                <div class="author-info">
+                        <p class="name">By <strong>Vineet Khandelwal</strong></p>
+                        <p class="bio">
+                        I'm a passionate software developer and technology enthusiast from India. I write about
+                        Python, Django and Web Development. <a href="{% url 'blog:about_me' %}"">Read more</a>.
+                        </p>
+                       
+                </div>
+        
+        </div>
+</section>
+
+</div>
+
 
 {% endblock %}

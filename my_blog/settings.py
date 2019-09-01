@@ -16,6 +16,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'template')
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -120,6 +123,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+
+    #  'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'Blog',
+    #     'USER': 'Admin',
+    #     'PASSWORD': 'abc123!!!',
+    #     'HOST': 'localhost',
+    #     'PORT': '8000',
+    # }
+
+
 }
 
 
@@ -143,6 +157,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 GOOGLE_RECAPTCHA_SECRET_KEY = '6Lf09LUUAAAAAGiwc_cp3YZwWdIKs3v_pYlkkIuw'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 # Internationalization
@@ -167,7 +182,13 @@ USE_TZ = True
 #AUTH_USER_MODEL = 'core.User'
 
 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
