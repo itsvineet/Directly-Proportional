@@ -28,7 +28,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=500)
     # content = models.RichTextField()
     content = RichTextField(blank=True, null=True, config_name="default")
     # content = RichTextUploadingField(blank=True, null=True)  # its for image uploading functionality

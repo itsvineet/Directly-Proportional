@@ -28,8 +28,8 @@
           {% for post in latest_post %}
           <div class="article-box">
             <img class="image" src="{{post.image.url}}" alt="article-pic" width="90%" height="200">
-            <h3>{{post.title}}</h3>
-            <p>{{post.content|striptags|truncatechars:150| safe}}</p>
+            <h3><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title|safe}}</a></h3>
+            <p>{{post.content|striptags|truncatechars:120| safe}}</p>
           </div>       
         
           {% endfor %}
