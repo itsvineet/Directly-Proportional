@@ -111,7 +111,9 @@ header nav li:hover{
     border: #e8491d solid 1px;
 }
 
-/* Showcase */
+/* Home */
+
+    /* Showcase */
 
 #showcase{
     min-height: 450px;
@@ -171,8 +173,12 @@ header nav li:hover{
 
 #latest-articles{
     background: #e8491d;
-    height: 800px;
+    min-height: 800px;
     margin-top: 0px;
+}
+
+#latest-articles .container{
+    padding-bottom: 10px;
 }
 
 #latest-articles .all-latest{
@@ -304,21 +310,17 @@ aside#sidebar div.author-picture img{
     width: 70%;
 }
 
-
-
-
 /* main-col */
 
 article#main-col{
     float: left;
     width: 65%;
+    padding-bottom: 20px;
+    /* margin-bottom: 20px; */
 
     
 }
 
-
-
-/* Article */
 
 /* Post list */
 
@@ -401,7 +403,7 @@ article.article-body h4{
     
 }
 
-/* card post-author */
+    /* card post-author */
 
 .card {
     /* Add shadows to create the "card" effect */
@@ -498,4 +500,128 @@ footer{
     color: #ffffff;
     background-color: #e8491d;
     text-align: center;
+}
+
+
+/* media queries */
+
+@media(max-width: 768px){
+    header .logo,
+    header nav,
+    header nav li,
+    article#main-col, 
+    aside#sidebar,
+    #latest-articles .article-box{
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Sidebar */
+
+    aside#sidebar{
+        text-align: left;
+    }
+    aside#sidebar div.author-picture img{
+        height: 170px;
+        width: 40%;
+    }
+    
+
+
+    .container_1, 
+    .container{
+        width: 90%;
+
+    }
+
+    div.post-list p.title,
+    div.post-list p.content,
+    div.post-list p.post-meta,
+    .about-me-page{
+        
+        text-align: left;
+    }
+
+    div.post-list p.title a,
+    article.article-body p.title{
+        font-size:25px;
+    }
+
+
+     /* header */
+
+    header .logo{
+        margin-bottom: 10px;
+    }
+
+    header nav{
+        margin-bottom: 10px;
+    }
+
+    header .logo a{
+        font-size: 20px;
+    }
+
+    /* Post Detail */
+    
+    section.card .author-picture{
+        width: 20%;     
+    }
+
+    section.card .author-info{      
+        width: 70%;
+        font-size: 14px;
+    }
+
+
+    article.article-body img{
+        height: 250px;
+    }
+
+    article.article-body p.author{
+        font-size: 15px;
+    }
+
+    /* About_me */
+    blockquote {
+       
+        border-left: #C8C8C8 solid 5px; 
+        padding-left: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        text-align: left;
+      }
+
+    /* Home */
+
+    #showcase,
+    #contribute-section{
+        min-height: 400px;
+        background-position-y: 45%;
+        background-size: inherit;       
+    }
+
+    #latest-articles{
+        min-height: 1500px;
+    }
+    
+    #latest-articels .container{
+        padding-right: 10px;
+    }
+    
+    #latest-articles .article-box{
+        text-align: left;     
+        margin-bottom: 20px;
+    }
+
+
+
+
+
+
+
+
+  
+
 }
