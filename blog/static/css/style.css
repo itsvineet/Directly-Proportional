@@ -18,7 +18,7 @@ body{
     overflow: hidden;
 }
 
-ul{
+nav ul{
     margin: 0;
     padding: 0;
 }
@@ -563,6 +563,13 @@ footer{
         font-size: 20px;
     }
 
+    nav a{
+        font-size: 10px;
+    }
+    nav li{
+        padding: 0 10px 0 10px;
+    }
+
     /* Post Detail */
     
     section.card .author-picture{
@@ -597,7 +604,7 @@ footer{
 
     #showcase,
     #contribute-section{
-        min-height: 400px;
+        min-height: auto;
         background-position-y: 45%;
         background-size: inherit;       
     }
@@ -614,14 +621,6 @@ footer{
         text-align: left;     
         margin-bottom: 20px;
     }
-
-
-
-
-
-
-
-
   
 
 }
