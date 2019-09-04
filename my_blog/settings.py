@@ -28,7 +28,7 @@ SECRET_KEY = 'hzm4h85%z%b+5p&!e)i-*nj002-+)gcdg#hotgsrqe5#ls$bgs'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["vineetkhandelwal.pythonanywhere.com", ]
 
 
 # Application definition
@@ -182,12 +182,14 @@ USE_TZ = True
 #AUTH_USER_MODEL = 'core.User'
 
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+STATIC_ROOT = "/home/VineetKhandelwal/Directly-Proportional/static"
 
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+
+# STATICFILES_DIRS = (
+#     os.path.join(PROJECT_ROOT, 'static'),
+# )
 
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
